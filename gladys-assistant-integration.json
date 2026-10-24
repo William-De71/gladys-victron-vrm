@@ -1,0 +1,1609 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Victron VRM",
+  "description": {
+    "en": "Victron Energy installations via VRM: battery, solar, grid, alarms and forecasts.",
+    "fr": "Installations Victron Energy via VRM : batterie, solaire, réseau, alarmes et prévisions.",
+    "de": "Victron-Energy-Anlagen über VRM: Batterie, Solar, Netz, Alarme und Prognosen.",
+    "es": "Instalaciones Victron Energy vía VRM: batería, solar, red, alarmas y previsiones."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/william-de71/gladys-victron-vrm:0.1.0",
+  "gladys_version": ">=5.1.0",
+  "categories": ["energy"],
+  "cover_image": "https://raw.githubusercontent.com/William-De71/gladys-victron-vrm/main/cover.jpg",
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "VRM access token",
+        "fr": "Jeton d’accès VRM",
+        "de": "VRM-Zugriffstoken",
+        "es": "Token de acceso de VRM"
+      },
+      "description": {
+        "en": "Sign in to vrm.victronenergy.com, open Preferences → Integrations → Access tokens, create a token and paste it below. A token opens the whole account (keep it secret); this integration only reads. The data travel through the Victron cloud. This integration is not affiliated with Victron Energy.",
+        "fr": "Connectez-vous à vrm.victronenergy.com, ouvrez Preferences → Integrations → Access tokens, créez un jeton et collez-le ci-dessous. Un jeton ouvre tout le compte (gardez-le secret) ; cette intégration ne fait que lire. Les données passent par le cloud de Victron. Cette intégration n’est pas affiliée à Victron Energy.",
+        "de": "Melde dich bei vrm.victronenergy.com an, öffne Preferences → Integrations → Access tokens, erstelle ein Token und füge es unten ein. Ein Token öffnet das ganze Konto (halte es geheim); diese Integration liest nur. Die Daten laufen über die Victron-Cloud. Diese Integration ist nicht mit Victron Energy verbunden.",
+        "es": "Inicie sesión en vrm.victronenergy.com, abra Preferences → Integrations → Access tokens, cree un token y péguelo abajo. Un token abre toda la cuenta (manténgalo en secreto); esta integración solo lee. Los datos pasan por la nube de Victron. Esta integración no está afiliada a Victron Energy."
+      },
+      "links": [
+        {
+          "url": "https://vrm.victronenergy.com/access-tokens",
+          "label": {
+            "en": "VRM access tokens",
+            "fr": "Jetons d’accès VRM",
+            "de": "VRM-Zugriffstokens",
+            "es": "Tokens de acceso de VRM"
+          }
+        },
+        {
+          "url": "https://vrm-api-docs.victronenergy.com/",
+          "label": {
+            "en": "VRM API documentation",
+            "fr": "Documentation de l’API VRM",
+            "de": "Dokumentation der VRM-API",
+            "es": "Documentación de la API de VRM"
+          }
+        }
+      ]
+    },
+    {
+      "key": "access_token",
+      "type": "secret",
+      "required": true,
+      "label": {
+        "en": "Access token",
+        "fr": "Jeton d’accès",
+        "de": "Zugriffstoken",
+        "es": "Token de acceso"
+      },
+      "placeholder": {
+        "en": "The token created in VRM",
+        "fr": "Le jeton créé dans VRM",
+        "de": "Das in VRM erstellte Token",
+        "es": "El token creado en VRM"
+      }
+    },
+    {
+      "key": "readings",
+      "type": "section",
+      "label": {
+        "en": "Readings and triggers",
+        "fr": "Lectures et déclencheurs",
+        "de": "Abfragen und Auslöser",
+        "es": "Lecturas y disparadores"
+      },
+      "description": {
+        "en": "VRM receives the data of an installation at the logging interval of its GX device (Settings → VRM online portal → Log interval, often 15 minutes): reading more often than that brings nothing new.",
+        "fr": "VRM reçoit les données d’une installation à l’intervalle de journalisation de son appareil GX (Paramètres → Portail VRM en ligne → Intervalle de journalisation, souvent 15 minutes) : lire plus souvent n’apporte rien de neuf.",
+        "de": "VRM erhält die Daten einer Anlage im Log-Intervall ihres GX-Geräts (Einstellungen → VRM-Online-Portal → Log-Intervall, oft 15 Minuten): Häufiger abzufragen bringt nichts Neues.",
+        "es": "VRM recibe los datos de una instalación al intervalo de registro de su dispositivo GX (Ajustes → Portal VRM en línea → Intervalo de registro, a menudo 15 minutos): leer más a menudo no aporta nada nuevo."
+      }
+    },
+    {
+      "key": "poll_interval",
+      "type": "select",
+      "default": "300",
+      "label": {
+        "en": "Reading of the installations",
+        "fr": "Lecture des installations",
+        "de": "Abfrage der Anlagen",
+        "es": "Lectura de las instalaciones"
+      },
+      "description": {
+        "en": "How often the latest values of every installation are read (one request for all).",
+        "fr": "Fréquence de lecture des dernières valeurs de toutes les installations (une seule requête).",
+        "de": "Wie oft die letzten Werte aller Anlagen gelesen werden (eine Anfrage für alle).",
+        "es": "Frecuencia de lectura de los últimos valores de todas las instalaciones (una sola petición)."
+      },
+      "options": [
+        {
+          "value": "60",
+          "label": {
+            "en": "Every minute",
+            "fr": "Toutes les minutes",
+            "de": "Jede Minute",
+            "es": "Cada minuto"
+          }
+        },
+        {
+          "value": "120",
+          "label": {
+            "en": "Every 2 minutes",
+            "fr": "Toutes les 2 minutes",
+            "de": "Alle 2 Minuten",
+            "es": "Cada 2 minutos"
+          }
+        },
+        {
+          "value": "300",
+          "label": {
+            "en": "Every 5 minutes",
+            "fr": "Toutes les 5 minutes",
+            "de": "Alle 5 Minuten",
+            "es": "Cada 5 minutos"
+          }
+        },
+        {
+          "value": "600",
+          "label": {
+            "en": "Every 10 minutes",
+            "fr": "Toutes les 10 minutes",
+            "de": "Alle 10 Minuten",
+            "es": "Cada 10 minutos"
+          }
+        },
+        {
+          "value": "900",
+          "label": {
+            "en": "Every 15 minutes",
+            "fr": "Toutes les 15 minutes",
+            "de": "Alle 15 Minuten",
+            "es": "Cada 15 minutos"
+          }
+        }
+      ]
+    },
+    {
+      "key": "battery_low_level",
+      "type": "select",
+      "default": "20",
+      "label": {
+        "en": "Level of the “battery low” trigger",
+        "fr": "Niveau du déclencheur « batterie faible »",
+        "de": "Stand des Auslösers „Batterie schwach“",
+        "es": "Nivel del disparador «batería baja»"
+      },
+      "options": [
+        {
+          "value": "10",
+          "label": {
+            "en": "10 %",
+            "fr": "10 %",
+            "de": "10 %",
+            "es": "10 %"
+          }
+        },
+        {
+          "value": "15",
+          "label": {
+            "en": "15 %",
+            "fr": "15 %",
+            "de": "15 %",
+            "es": "15 %"
+          }
+        },
+        {
+          "value": "20",
+          "label": {
+            "en": "20 %",
+            "fr": "20 %",
+            "de": "20 %",
+            "es": "20 %"
+          }
+        },
+        {
+          "value": "25",
+          "label": {
+            "en": "25 %",
+            "fr": "25 %",
+            "de": "25 %",
+            "es": "25 %"
+          }
+        },
+        {
+          "value": "30",
+          "label": {
+            "en": "30 %",
+            "fr": "30 %",
+            "de": "30 %",
+            "es": "30 %"
+          }
+        },
+        {
+          "value": "40",
+          "label": {
+            "en": "40 %",
+            "fr": "40 %",
+            "de": "40 %",
+            "es": "40 %"
+          }
+        },
+        {
+          "value": "50",
+          "label": {
+            "en": "50 %",
+            "fr": "50 %",
+            "de": "50 %",
+            "es": "50 %"
+          }
+        }
+      ]
+    },
+    {
+      "key": "offline_after",
+      "type": "select",
+      "default": "60",
+      "label": {
+        "en": "Installation offline after",
+        "fr": "Installation hors ligne après",
+        "de": "Anlage offline nach",
+        "es": "Instalación sin conexión tras"
+      },
+      "description": {
+        "en": "Without new data in VRM for this long, the installation is offline (trigger, widgets) and its values are no longer published.",
+        "fr": "Sans nouvelles données dans VRM pendant ce délai, l’installation est hors ligne (déclencheur, widgets) et ses valeurs ne sont plus publiées.",
+        "de": "Ohne neue Daten in VRM so lange ist die Anlage offline (Auslöser, Widgets) und ihre Werte werden nicht mehr veröffentlicht.",
+        "es": "Sin datos nuevos en VRM durante este tiempo, la instalación queda sin conexión (disparador, widgets) y sus valores dejan de publicarse."
+      },
+      "options": [
+        {
+          "value": "30",
+          "label": {
+            "en": "30 minutes",
+            "fr": "30 minutes",
+            "de": "30 Minuten",
+            "es": "30 minutos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "1 hour",
+            "fr": "1 heure",
+            "de": "1 Stunde",
+            "es": "1 hora"
+          }
+        },
+        {
+          "value": "120",
+          "label": {
+            "en": "2 hours",
+            "fr": "2 heures",
+            "de": "2 Stunden",
+            "es": "2 horas"
+          }
+        },
+        {
+          "value": "240",
+          "label": {
+            "en": "4 hours",
+            "fr": "4 heures",
+            "de": "4 Stunden",
+            "es": "4 horas"
+          }
+        }
+      ]
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "default": "auto",
+      "label": {
+        "en": "Language of the texts",
+        "fr": "Langue des textes",
+        "de": "Sprache der Texte",
+        "es": "Idioma de los textos"
+      },
+      "description": {
+        "en": "Feature names, scene texts and errors. Automatic: the language of the last widget shown.",
+        "fr": "Noms des fonctionnalités, textes des scènes et erreurs. Automatique : la langue du dernier widget affiché.",
+        "de": "Namen der Funktionen, Szenentexte und Fehler. Automatisch: die Sprache des zuletzt angezeigten Widgets.",
+        "es": "Nombres de las funciones, textos de escenas y errores. Automático: el idioma del último widget mostrado."
+      },
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Automatic",
+            "fr": "Automatique",
+            "de": "Automatisch",
+            "es": "Automático"
+          }
+        },
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "English",
+            "de": "English",
+            "es": "English"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "Français",
+            "fr": "Français",
+            "de": "Français",
+            "es": "Français"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "Deutsch",
+            "fr": "Deutsch",
+            "de": "Deutsch",
+            "es": "Deutsch"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Español",
+            "fr": "Español",
+            "de": "Español",
+            "es": "Español"
+          }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "timeout_seconds": 30,
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "description": {
+        "en": "Checks the token and lists the installations of the VRM account.",
+        "fr": "Vérifie le jeton et liste les installations du compte VRM.",
+        "de": "Prüft das Token und listet die Anlagen des VRM-Kontos.",
+        "es": "Comprueba el token y lista las instalaciones de la cuenta VRM."
+      }
+    },
+    {
+      "key": "diagnostic",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "Diagnostic",
+        "fr": "Diagnostic",
+        "de": "Diagnose",
+        "es": "Diagnóstico"
+      },
+      "description": {
+        "en": "Writes the state of the integration to its logs, without the token.",
+        "fr": "Écrit l’état de l’intégration dans ses journaux, sans le jeton.",
+        "de": "Schreibt den Zustand der Integration in ihre Logs, ohne das Token.",
+        "es": "Escribe el estado de la integración en sus registros, sin el token."
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "key": "live",
+      "icon": "zap",
+      "label": {
+        "en": "Victron now",
+        "fr": "Victron en direct",
+        "de": "Victron jetzt",
+        "es": "Victron ahora"
+      },
+      "description": {
+        "en": "Energy flow now: battery, solar, AC loads, grid, generator.",
+        "fr": "Flux d’énergie en direct : batterie, solaire, consommation, réseau, groupe.",
+        "de": "Energiefluss jetzt: Batterie, Solar, Verbrauch, Netz, Generator.",
+        "es": "Flujo de energía ahora: batería, solar, consumo, red, generador."
+      },
+      "settings": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for the first installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour la première installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für die erste Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para la primera instalación."
+          }
+        }
+      ]
+    },
+    {
+      "key": "today",
+      "icon": "sun",
+      "label": {
+        "en": "Victron today",
+        "fr": "Victron aujourd’hui",
+        "de": "Victron heute",
+        "es": "Victron hoy"
+      },
+      "description": {
+        "en": "The energies of the day and their hourly chart.",
+        "fr": "Les énergies du jour et leur graphique par heure.",
+        "de": "Die Energien des Tages und ihr Stundendiagramm.",
+        "es": "Las energías del día y su gráfico por horas."
+      },
+      "settings": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for the first installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour la première installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für die erste Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para la primera instalación."
+          }
+        }
+      ]
+    },
+    {
+      "key": "forecast",
+      "icon": "sunrise",
+      "label": {
+        "en": "Victron forecast",
+        "fr": "Prévision Victron",
+        "de": "Victron-Prognose",
+        "es": "Previsión Victron"
+      },
+      "description": {
+        "en": "VRM solar and consumption forecasts, today and tomorrow.",
+        "fr": "Prévisions VRM de solaire et de consommation, aujourd’hui et demain.",
+        "de": "VRM-Prognosen für Solar und Verbrauch, heute und morgen.",
+        "es": "Previsiones de VRM de solar y consumo, hoy y mañana."
+      },
+      "settings": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for the first installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour la première installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für die erste Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para la primera instalación."
+          }
+        }
+      ]
+    },
+    {
+      "key": "alarms",
+      "icon": "alert-triangle",
+      "label": {
+        "en": "Victron alarms",
+        "fr": "Alarmes Victron",
+        "de": "Victron-Alarme",
+        "es": "Alarmas Victron"
+      },
+      "description": {
+        "en": "The VRM alarm log: active alarms first, then the last cleared.",
+        "fr": "Le journal des alarmes VRM : actives d’abord, puis les dernières terminées.",
+        "de": "Das VRM-Alarmprotokoll: aktive zuerst, dann die zuletzt beendeten.",
+        "es": "El registro de alarmas de VRM: activas primero, luego las últimas terminadas."
+      },
+      "settings": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for the first installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour la première installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für die erste Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para la primera instalación."
+          }
+        }
+      ]
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "alarm_raised",
+      "label": {
+        "en": "Victron VRM: alarm raised",
+        "fr": "Victron VRM : alarme levée",
+        "de": "Victron VRM: Alarm ausgelöst",
+        "es": "Victron VRM: alarma activada"
+      },
+      "description": {
+        "en": "A new active alarm in the VRM alarm log (low battery, grid lost, overload…).",
+        "fr": "Une nouvelle alarme active dans le journal VRM (batterie faible, réseau perdu, surcharge…).",
+        "de": "Ein neuer aktiver Alarm im VRM-Protokoll (Batterie schwach, Netzausfall, Überlast…).",
+        "es": "Una nueva alarma activa en el registro de VRM (batería baja, red perdida, sobrecarga…)."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "alarm_id",
+          "type": "number",
+          "label": {
+            "en": "Alarm id",
+            "fr": "Identifiant de l’alarme",
+            "de": "Alarm-ID",
+            "es": "Id. de la alarma"
+          }
+        },
+        {
+          "key": "description",
+          "type": "string",
+          "label": {
+            "en": "Alarm (VRM text)",
+            "fr": "Alarme (texte VRM)",
+            "de": "Alarm (VRM-Text)",
+            "es": "Alarma (texto de VRM)"
+          }
+        },
+        {
+          "key": "alarm_device",
+          "type": "string",
+          "label": {
+            "en": "Victron device of the alarm",
+            "fr": "Appareil Victron de l’alarme",
+            "de": "Victron-Gerät des Alarms",
+            "es": "Equipo Victron de la alarma"
+          }
+        },
+        {
+          "key": "started_at",
+          "type": "string",
+          "label": {
+            "en": "Started at (ISO 8601)",
+            "fr": "Début (ISO 8601)",
+            "de": "Beginn (ISO 8601)",
+            "es": "Inicio (ISO 8601)"
+          }
+        },
+        {
+          "key": "cleared_at",
+          "type": "string",
+          "label": {
+            "en": "Cleared at (ISO 8601)",
+            "fr": "Fin (ISO 8601)",
+            "de": "Ende (ISO 8601)",
+            "es": "Fin (ISO 8601)"
+          }
+        },
+        {
+          "key": "duration_minutes",
+          "type": "number",
+          "label": {
+            "en": "Duration (min)",
+            "fr": "Durée (min)",
+            "de": "Dauer (Min.)",
+            "es": "Duración (min)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "alarm_cleared",
+      "label": {
+        "en": "Victron VRM: alarm cleared",
+        "fr": "Victron VRM : alarme terminée",
+        "de": "Victron VRM: Alarm beendet",
+        "es": "Victron VRM: alarma terminada"
+      },
+      "description": {
+        "en": "An alarm of the VRM alarm log is no longer active.",
+        "fr": "Une alarme du journal VRM n’est plus active.",
+        "de": "Ein Alarm des VRM-Protokolls ist nicht mehr aktiv.",
+        "es": "Una alarma del registro de VRM ya no está activa."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "alarm_id",
+          "type": "number",
+          "label": {
+            "en": "Alarm id",
+            "fr": "Identifiant de l’alarme",
+            "de": "Alarm-ID",
+            "es": "Id. de la alarma"
+          }
+        },
+        {
+          "key": "description",
+          "type": "string",
+          "label": {
+            "en": "Alarm (VRM text)",
+            "fr": "Alarme (texte VRM)",
+            "de": "Alarm (VRM-Text)",
+            "es": "Alarma (texto de VRM)"
+          }
+        },
+        {
+          "key": "alarm_device",
+          "type": "string",
+          "label": {
+            "en": "Victron device of the alarm",
+            "fr": "Appareil Victron de l’alarme",
+            "de": "Victron-Gerät des Alarms",
+            "es": "Equipo Victron de la alarma"
+          }
+        },
+        {
+          "key": "started_at",
+          "type": "string",
+          "label": {
+            "en": "Started at (ISO 8601)",
+            "fr": "Début (ISO 8601)",
+            "de": "Beginn (ISO 8601)",
+            "es": "Inicio (ISO 8601)"
+          }
+        },
+        {
+          "key": "cleared_at",
+          "type": "string",
+          "label": {
+            "en": "Cleared at (ISO 8601)",
+            "fr": "Fin (ISO 8601)",
+            "de": "Ende (ISO 8601)",
+            "es": "Fin (ISO 8601)"
+          }
+        },
+        {
+          "key": "duration_minutes",
+          "type": "number",
+          "label": {
+            "en": "Duration (min)",
+            "fr": "Durée (min)",
+            "de": "Dauer (Min.)",
+            "es": "Duración (min)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "battery_low",
+      "label": {
+        "en": "Victron VRM: battery low",
+        "fr": "Victron VRM : batterie faible",
+        "de": "Victron VRM: Batterie schwach",
+        "es": "Victron VRM: batería baja"
+      },
+      "description": {
+        "en": "The battery reaches the level of the configuration. Again once 5 points above.",
+        "fr": "La batterie atteint le niveau de la configuration. À nouveau après 5 points de plus.",
+        "de": "Die Batterie erreicht den Stand der Konfiguration. Erneut nach 5 Punkten mehr.",
+        "es": "La batería llega al nivel de la configuración. De nuevo tras subir 5 puntos."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "battery_voltage",
+          "type": "number",
+          "label": {
+            "en": "Battery voltage (V)",
+            "fr": "Tension de la batterie (V)",
+            "de": "Batteriespannung (V)",
+            "es": "Tensión de la batería (V)"
+          }
+        },
+        {
+          "key": "low_level",
+          "type": "number",
+          "label": {
+            "en": "Low level (%)",
+            "fr": "Niveau bas (%)",
+            "de": "Unterer Stand (%)",
+            "es": "Nivel bajo (%)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "battery_full",
+      "label": {
+        "en": "Victron VRM: battery full",
+        "fr": "Victron VRM : batterie pleine",
+        "de": "Victron VRM: Batterie voll",
+        "es": "Victron VRM: batería llena"
+      },
+      "description": {
+        "en": "The battery reaches 100 %. Again once it went under 95 %.",
+        "fr": "La batterie atteint 100 %. À nouveau après être repassée sous 95 %.",
+        "de": "Die Batterie erreicht 100 %. Erneut, nachdem sie unter 95 % fiel.",
+        "es": "La batería llega al 100 %. De nuevo tras bajar del 95 %."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "battery_voltage",
+          "type": "number",
+          "label": {
+            "en": "Battery voltage (V)",
+            "fr": "Tension de la batterie (V)",
+            "de": "Batteriespannung (V)",
+            "es": "Tensión de la batería (V)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "grid_lost",
+      "label": {
+        "en": "Victron VRM: grid lost",
+        "fr": "Victron VRM : réseau perdu",
+        "de": "Victron VRM: Netzausfall",
+        "es": "Victron VRM: red perdida"
+      },
+      "description": {
+        "en": "The grid alarm of the system goes off: mains or shore power is gone.",
+        "fr": "L’alarme réseau du système se déclenche : le secteur ou le quai est coupé.",
+        "de": "Der Netzalarm des Systems löst aus: Netz- oder Landstrom ist weg.",
+        "es": "La alarma de red del sistema se activa: la red o la toma de puerto falla."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "grid_restored",
+      "label": {
+        "en": "Victron VRM: grid restored",
+        "fr": "Victron VRM : réseau rétabli",
+        "de": "Victron VRM: Netz zurück",
+        "es": "Victron VRM: red restablecida"
+      },
+      "description": {
+        "en": "The grid alarm of the system is over: mains or shore power is back.",
+        "fr": "L’alarme réseau du système est terminée : le secteur ou le quai est revenu.",
+        "de": "Der Netzalarm des Systems ist vorbei: Netz- oder Landstrom ist zurück.",
+        "es": "La alarma de red del sistema terminó: la red o la toma de puerto ha vuelto."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "minutes_lost",
+          "type": "number",
+          "label": {
+            "en": "Minutes without grid",
+            "fr": "Minutes sans réseau",
+            "de": "Minuten ohne Netz",
+            "es": "Minutos sin red"
+          }
+        }
+      ]
+    },
+    {
+      "key": "installation_offline",
+      "label": {
+        "en": "Victron VRM: installation offline",
+        "fr": "Victron VRM : installation hors ligne",
+        "de": "Victron VRM: Anlage offline",
+        "es": "Victron VRM: instalación sin conexión"
+      },
+      "description": {
+        "en": "VRM received no data from the installation for the delay of the configuration.",
+        "fr": "VRM ne reçoit plus de données de l’installation depuis le délai de la configuration.",
+        "de": "VRM erhält seit der Frist der Konfiguration keine Daten mehr von der Anlage.",
+        "es": "VRM no recibe datos de la instalación desde el plazo de la configuración."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "minutes_without_data",
+          "type": "number",
+          "label": {
+            "en": "Minutes without data",
+            "fr": "Minutes sans données",
+            "de": "Minuten ohne Daten",
+            "es": "Minutos sin datos"
+          }
+        }
+      ]
+    },
+    {
+      "key": "installation_online",
+      "label": {
+        "en": "Victron VRM: installation back online",
+        "fr": "Victron VRM : installation de retour",
+        "de": "Victron VRM: Anlage wieder online",
+        "es": "Victron VRM: instalación de nuevo en línea"
+      },
+      "description": {
+        "en": "VRM receives data from the installation again after it went offline.",
+        "fr": "VRM reçoit de nouveau des données de l’installation après une coupure.",
+        "de": "VRM erhält wieder Daten von der Anlage, nachdem sie offline war.",
+        "es": "VRM vuelve a recibir datos de la instalación tras quedar sin conexión."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for any installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour n’importe quelle installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für jede Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para cualquier instalación."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "installation",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "installation_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
+          }
+        },
+        {
+          "key": "site_id",
+          "type": "number",
+          "label": {
+            "en": "VRM installation id",
+            "fr": "Identifiant d’installation VRM",
+            "de": "VRM-Anlagen-ID",
+            "es": "Id. de instalación VRM"
+          }
+        },
+        {
+          "key": "minutes_without_data",
+          "type": "number",
+          "label": {
+            "en": "Minutes without data",
+            "fr": "Minutes sans données",
+            "de": "Minuten ohne Daten",
+            "es": "Minutos sin datos"
+          }
+        }
+      ]
+    },
+    {
+      "key": "access_refused",
+      "label": {
+        "en": "Victron VRM: access refused",
+        "fr": "Victron VRM : accès refusé",
+        "de": "Victron VRM: Zugriff verweigert",
+        "es": "Victron VRM: acceso rechazado"
+      },
+      "description": {
+        "en": "VRM refuses the access token: revoked, expired or wrong.",
+        "fr": "VRM refuse le jeton d’accès : révoqué, expiré ou erroné.",
+        "de": "VRM lehnt das Zugriffstoken ab: widerrufen, abgelaufen oder falsch.",
+        "es": "VRM rechaza el token de acceso: revocado, caducado o incorrecto."
+      },
+      "fields": [
+        {
+          "key": "reason",
+          "type": "select",
+          "required": false,
+          "label": {
+            "en": "Reason",
+            "fr": "Raison",
+            "de": "Grund",
+            "es": "Motivo"
+          },
+          "description": {
+            "en": "Leave empty for any reason.",
+            "fr": "Laissez vide pour toute raison.",
+            "de": "Leer lassen für jeden Grund.",
+            "es": "Déjelo vacío para cualquier motivo."
+          },
+          "options": [
+            {
+              "value": "auth",
+              "label": {
+                "en": "Token refused",
+                "fr": "Jeton refusé",
+                "de": "Token abgelehnt",
+                "es": "Token rechazado"
+              }
+            },
+            {
+              "value": "forbidden",
+              "label": {
+                "en": "Access denied",
+                "fr": "Accès interdit",
+                "de": "Zugriff verweigert",
+                "es": "Acceso denegado"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "reason",
+          "type": "string",
+          "label": {
+            "en": "Reason",
+            "fr": "Raison",
+            "de": "Grund",
+            "es": "Motivo"
+          }
+        },
+        {
+          "key": "code",
+          "type": "string",
+          "label": {
+            "en": "VRM error code",
+            "fr": "Code d’erreur VRM",
+            "de": "VRM-Fehlercode",
+            "es": "Código de error de VRM"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Meldung",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "get_today",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "Victron VRM: energies of today",
+        "fr": "Victron VRM : énergies du jour",
+        "de": "Victron VRM: Energien von heute",
+        "es": "Victron VRM: energías de hoy"
+      },
+      "description": {
+        "en": "The energies of today as last read (no request): for a message or a condition.",
+        "fr": "Les énergies du jour telles que lues (sans requête) : pour un message ou une condition.",
+        "de": "Die Energien von heute wie zuletzt gelesen (ohne Anfrage): für eine Nachricht oder Bedingung.",
+        "es": "Las energías de hoy tal como se leyeron (sin petición): para un mensaje o una condición."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for the first installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour la première installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für die erste Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para la primera instalación."
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "solar_kwh",
+          "type": "number",
+          "label": {
+            "en": "Solar production (kWh)",
+            "fr": "Production solaire (kWh)",
+            "de": "Solarerzeugung (kWh)",
+            "es": "Producción solar (kWh)"
+          }
+        },
+        {
+          "key": "consumption_kwh",
+          "type": "number",
+          "label": {
+            "en": "Consumption (kWh)",
+            "fr": "Consommation (kWh)",
+            "de": "Verbrauch (kWh)",
+            "es": "Consumo (kWh)"
+          }
+        },
+        {
+          "key": "import_kwh",
+          "type": "number",
+          "label": {
+            "en": "Grid import (kWh)",
+            "fr": "Import réseau (kWh)",
+            "de": "Netzbezug (kWh)",
+            "es": "Importación de la red (kWh)"
+          }
+        },
+        {
+          "key": "export_kwh",
+          "type": "number",
+          "label": {
+            "en": "Grid export (kWh)",
+            "fr": "Export réseau (kWh)",
+            "de": "Einspeisung (kWh)",
+            "es": "Exportación a la red (kWh)"
+          }
+        },
+        {
+          "key": "charge_kwh",
+          "type": "number",
+          "label": {
+            "en": "Battery charged (kWh)",
+            "fr": "Batterie chargée (kWh)",
+            "de": "Batterie geladen (kWh)",
+            "es": "Batería cargada (kWh)"
+          }
+        },
+        {
+          "key": "discharge_kwh",
+          "type": "number",
+          "label": {
+            "en": "Battery discharged (kWh)",
+            "fr": "Batterie déchargée (kWh)",
+            "de": "Batterie entladen (kWh)",
+            "es": "Batería descargada (kWh)"
+          }
+        },
+        {
+          "key": "generator_kwh",
+          "type": "number",
+          "label": {
+            "en": "Generator (kWh)",
+            "fr": "Groupe électrogène (kWh)",
+            "de": "Generator (kWh)",
+            "es": "Generador (kWh)"
+          }
+        },
+        {
+          "key": "self_sufficiency",
+          "type": "number",
+          "label": {
+            "en": "Self-sufficiency (%)",
+            "fr": "Autonomie (%)",
+            "de": "Autarkie (%)",
+            "es": "Autosuficiencia (%)"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery level (%)",
+            "fr": "Niveau de batterie (%)",
+            "de": "Batteriestand (%)",
+            "es": "Nivel de batería (%)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "get_forecast",
+      "timeout_seconds": 30,
+      "label": {
+        "en": "Victron VRM: solar forecast",
+        "fr": "Victron VRM : prévision solaire",
+        "de": "Victron VRM: Solarprognose",
+        "es": "Victron VRM: previsión solar"
+      },
+      "description": {
+        "en": "The VRM solar and consumption forecasts for today and tomorrow, in kWh.",
+        "fr": "Les prévisions VRM de production solaire et de consommation, aujourd’hui et demain, en kWh.",
+        "de": "Die VRM-Prognosen für Solarertrag und Verbrauch, heute und morgen, in kWh.",
+        "es": "Las previsiones de VRM de producción solar y consumo, hoy y mañana, en kWh."
+      },
+      "fields": [
+        {
+          "key": "installation",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Installation",
+            "fr": "Installation",
+            "de": "Anlage",
+            "es": "Instalación"
+          },
+          "description": {
+            "en": "A Victron VRM device. Leave empty for the first installation.",
+            "fr": "Un appareil Victron VRM. Laissez vide pour la première installation.",
+            "de": "Ein Victron-VRM-Gerät. Leer lassen für die erste Anlage.",
+            "es": "Un dispositivo Victron VRM. Déjelo vacío para la primera instalación."
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "solar_today_kwh",
+          "type": "number",
+          "label": {
+            "en": "Solar today (kWh)",
+            "fr": "Solaire du jour (kWh)",
+            "de": "Solar heute (kWh)",
+            "es": "Solar de hoy (kWh)"
+          }
+        },
+        {
+          "key": "solar_remaining_kwh",
+          "type": "number",
+          "label": {
+            "en": "Solar still to come today (kWh)",
+            "fr": "Solaire restant aujourd’hui (kWh)",
+            "de": "Solar heute noch erwartet (kWh)",
+            "es": "Solar pendiente hoy (kWh)"
+          }
+        },
+        {
+          "key": "solar_tomorrow_kwh",
+          "type": "number",
+          "label": {
+            "en": "Solar tomorrow (kWh)",
+            "fr": "Solaire demain (kWh)",
+            "de": "Solar morgen (kWh)",
+            "es": "Solar mañana (kWh)"
+          }
+        },
+        {
+          "key": "consumption_today_kwh",
+          "type": "number",
+          "label": {
+            "en": "Consumption today (kWh)",
+            "fr": "Consommation du jour (kWh)",
+            "de": "Verbrauch heute (kWh)",
+            "es": "Consumo de hoy (kWh)"
+          }
+        },
+        {
+          "key": "consumption_tomorrow_kwh",
+          "type": "number",
+          "label": {
+            "en": "Consumption tomorrow (kWh)",
+            "fr": "Consommation demain (kWh)",
+            "de": "Verbrauch morgen (kWh)",
+            "es": "Consumo mañana (kWh)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    }
+  ]
+}

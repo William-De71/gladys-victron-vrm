@@ -1,0 +1,1530 @@
+{
+  "_comment": "Answers of the live VRM API v2 on the public demo account (users/me, installations?extended=1 trimmed to two sites, stats type=kwh interval=days, stats type=forecast interval=hours, an empty alarm-log), recorded on 2026-10-24. Identifiers, pictures and MQTT hosts removed.",
+  "me": {
+    "success": true,
+    "user": {
+      "id": 22,
+      "name": "Demo User",
+      "email": "demo@victronenergy.com",
+      "country": "The Netherlands",
+      "idAccessToken": null,
+      "accessLevel": 0
+    }
+  },
+  "installations": {
+    "success": true,
+    "records": [
+      {
+        "idSite": 151734,
+        "accessLevel": 0,
+        "owner": true,
+        "is_admin": false,
+        "name": "35ft Yacht",
+        "identifier": "0000demo151734",
+        "idUser": 22,
+        "pvMax": 0,
+        "timezone": "Africa/Casablanca",
+        "phonenumber": null,
+        "notes": null,
+        "geofenceEnabled": false,
+        "realtimeUpdates": true,
+        "restrictNodeRed": false,
+        "hasMains": 1,
+        "hasGenerator": 0,
+        "noDataAlarmTimeout": null,
+        "alarmMonitoring": 1,
+        "invalidVRMAuthTokenUsedInLogRequest": 0,
+        "syscreated": 1643115186,
+        "isPaygo": 0,
+        "paygoCurrency": null,
+        "paygoTotalAmount": null,
+        "inverterChargerControl": 0,
+        "remoteConsoleChoice": "rc_gui_v2",
+        "favorite": 0,
+        "isSystem": 0,
+        "shared": false,
+        "device_icon": "grid",
+        "alarm": false,
+        "last_timestamp": 1792856467,
+        "new_tags": false,
+        "current_time": "15:41",
+        "timezone_offset": 0,
+        "extended": [
+          {
+            "idDataAttribute": 2,
+            "code": "v",
+            "description": "Fw Version",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792721285,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": "v3.85",
+            "formattedValue": "v3.85"
+          },
+          {
+            "idDataAttribute": 40,
+            "code": "S",
+            "description": "VE.Bus state",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 1,
+            "textValue": "Absorption",
+            "instance": 257,
+            "timestamp": 1792856467,
+            "dbusServiceType": "vebus",
+            "dbusPath": "/State",
+            "rawValue": 4,
+            "formattedValue": "Absorption",
+            "instances": {
+              "257": {
+                "rawValue": 4,
+                "formattedValue": "Absorption",
+                "textValue": "Absorption",
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 143,
+            "code": "bv",
+            "description": "Voltage",
+            "formatWithUnit": "%.2F V",
+            "dataType": "float",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/Voltage",
+            "rawValue": 14.23,
+            "formattedValue": "14.23 V"
+          },
+          {
+            "idDataAttribute": 144,
+            "code": "bs",
+            "description": "Battery SOC",
+            "formatWithUnit": "%.1F %%",
+            "dataType": "float",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/Soc",
+            "rawValue": 99.8,
+            "formattedValue": "99.8 %"
+          },
+          {
+            "idDataAttribute": 147,
+            "code": "bc",
+            "description": "Current",
+            "formatWithUnit": "%.2F A",
+            "dataType": "float",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/Current",
+            "rawValue": 74.6,
+            "formattedValue": "74.60 A"
+          },
+          {
+            "idDataAttribute": 215,
+            "code": "bst",
+            "description": "Battery state",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 6,
+            "textValue": "charging",
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/State",
+            "rawValue": 1,
+            "formattedValue": "Charging"
+          },
+          {
+            "idDataAttribute": 251,
+            "code": "si1",
+            "description": "AC Input 1 ",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Shore power",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/SystemSetup/AcInput1",
+            "rawValue": 3,
+            "formattedValue": "Shore power"
+          },
+          {
+            "idDataAttribute": 252,
+            "code": "si2",
+            "description": "AC Input 2",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Not available",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/SystemSetup/AcInput2",
+            "rawValue": 0,
+            "formattedValue": "Not available"
+          },
+          {
+            "idDataAttribute": 331,
+            "code": "tr",
+            "description": "Tank remaining fluid",
+            "formatWithUnit": "%.0F L",
+            "dataType": "float",
+            "idDeviceType": 5,
+            "textValue": null,
+            "instance": 21,
+            "timestamp": 1792856467,
+            "dbusServiceType": "tank",
+            "dbusPath": "/Remaining",
+            "rawValue": "78",
+            "formattedValue": "78 L",
+            "instances": {
+              "20": {
+                "rawValue": "103",
+                "formattedValue": "103 L",
+                "textValue": null,
+                "timestamp": 1792856467
+              },
+              "21": {
+                "rawValue": "78",
+                "formattedValue": "78 L",
+                "textValue": null,
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 449,
+            "code": "tst",
+            "description": "Temperature type",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 17,
+            "textValue": "Generic",
+            "instance": 29,
+            "timestamp": 1792721290,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 2,
+            "formattedValue": "Generic",
+            "instances": {
+              "24": {
+                "rawValue": 1,
+                "formattedValue": "Fridge",
+                "textValue": "Fridge",
+                "timestamp": 1792721290
+              },
+              "25": {
+                "rawValue": 1,
+                "formattedValue": "Fridge",
+                "textValue": "Fridge",
+                "timestamp": 1792721290
+              },
+              "28": {
+                "rawValue": 1,
+                "formattedValue": "Fridge",
+                "textValue": "Fridge",
+                "timestamp": 1792721290
+              },
+              "29": {
+                "rawValue": 2,
+                "formattedValue": "Generic",
+                "textValue": "Generic",
+                "timestamp": 1792721290
+              }
+            }
+          },
+          {
+            "idDataAttribute": 450,
+            "code": "tsT",
+            "description": "Temperature",
+            "formatWithUnit": "%.1F °C",
+            "dataType": "float",
+            "idDeviceType": 17,
+            "textValue": null,
+            "instance": 29,
+            "timestamp": 1792856467,
+            "dbusServiceType": "temperature",
+            "dbusPath": "/Temperature",
+            "rawValue": 18.2,
+            "formattedValue": "18.2 °C",
+            "instances": {
+              "24": {
+                "rawValue": -18,
+                "formattedValue": "-18.0 °C",
+                "textValue": null,
+                "timestamp": 1792856467
+              },
+              "25": {
+                "rawValue": 12,
+                "formattedValue": "12.0 °C",
+                "textValue": null,
+                "timestamp": 1792856467
+              },
+              "28": {
+                "rawValue": 4.8,
+                "formattedValue": "4.8 °C",
+                "textValue": null,
+                "timestamp": 1792856467
+              },
+              "29": {
+                "rawValue": 18.2,
+                "formattedValue": "18.2 °C",
+                "textValue": null,
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 453,
+            "code": "cp",
+            "description": "Capabilities",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792721285,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 32767,
+            "formattedValue": "32767"
+          },
+          {
+            "idDataAttribute": 469,
+            "code": "sca",
+            "description": "ESS Scheduled Charging",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Not active",
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 0,
+            "formattedValue": "Not active"
+          },
+          {
+            "idDataAttribute": 570,
+            "code": "st",
+            "description": "System type",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "system",
+            "dbusPath": "/SystemType",
+            "rawValue": "Hub-1",
+            "formattedValue": "Hub-1"
+          },
+          {
+            "idDataAttribute": 571,
+            "code": "ss",
+            "description": "System state",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 6,
+            "textValue": "Absorption",
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": "system",
+            "dbusPath": "/SystemState/State",
+            "rawValue": 4,
+            "formattedValue": "Absorption"
+          },
+          {
+            "idDataAttribute": 577,
+            "code": "rtt",
+            "description": "D-Bus Round-trip time",
+            "formatWithUnit": "%.0F ms",
+            "dataType": "float",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856467,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 1,
+            "formattedValue": "1 ms"
+          },
+          {
+            "idDataAttribute": 637,
+            "code": "tscn",
+            "description": "Temperature custom name",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 17,
+            "textValue": null,
+            "instance": 29,
+            "timestamp": 1792721290,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": "Salon",
+            "formattedValue": "Salon",
+            "instances": {
+              "24": {
+                "rawValue": "Freezer",
+                "formattedValue": "Freezer",
+                "textValue": null,
+                "timestamp": 1792721290
+              },
+              "25": {
+                "rawValue": "Water tank temperature",
+                "formattedValue": "Water tank temperature",
+                "textValue": null,
+                "timestamp": 1792721290
+              },
+              "28": {
+                "rawValue": "Refrigerator",
+                "formattedValue": "Refrigerator",
+                "textValue": null,
+                "timestamp": 1792721290
+              },
+              "29": {
+                "rawValue": "Salon",
+                "formattedValue": "Salon",
+                "textValue": null,
+                "timestamp": 1792721290
+              }
+            }
+          },
+          {
+            "idDataAttribute": 692,
+            "code": "nr",
+            "description": "NodeRed",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Off",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Services/NodeRed",
+            "rawValue": 0,
+            "formattedValue": "Off"
+          },
+          {
+            "idDataAttribute": 693,
+            "code": "sk",
+            "description": "SignalK",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Off",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Services/SignalK",
+            "rawValue": 0,
+            "formattedValue": "Off"
+          },
+          {
+            "idDataAttribute": 1270,
+            "code": "dem",
+            "description": "DESS Mode – Controlled by user",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Off",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/DynamicEss/Mode",
+            "rawValue": 0,
+            "formattedValue": "Off"
+          },
+          {
+            "idDataAttribute": 1336,
+            "code": "decp",
+            "description": "DESS Capabilities",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "system",
+            "dbusPath": "/DynamicEss/Capabilities",
+            "rawValue": 191,
+            "formattedValue": "191"
+          },
+          {
+            "idDataAttribute": 1504,
+            "code": "dea",
+            "description": "DESS Available",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Not available",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "system",
+            "dbusPath": "/DynamicEss/Available",
+            "rawValue": 0,
+            "formattedValue": "Not available"
+          },
+          {
+            "idDataAttribute": 1612,
+            "code": "vrm",
+            "description": "VRM Portal Mode",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Full",
+            "instance": 0,
+            "timestamp": 1792721292,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Network/VrmPortal",
+            "rawValue": 2,
+            "formattedValue": "Full"
+          },
+          {
+            "idDataAttribute": 1722,
+            "code": "GUIv",
+            "description": "GUI version",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "1",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "platform",
+            "dbusPath": "/Gui/RunningVersion",
+            "rawValue": 1,
+            "formattedValue": "1"
+          },
+          {
+            "idDataAttribute": 1865,
+            "code": "shai",
+            "description": "System has normal AC loads",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Input side loads",
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/SystemSetup/HasAcInLoads",
+            "rawValue": 1,
+            "formattedValue": "Input side loads"
+          },
+          {
+            "idDataAttribute": 2041,
+            "code": "gsu",
+            "description": "GPS speed unit",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792721290,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Gps/SpeedUnit",
+            "rawValue": "km/h",
+            "formattedValue": "km/h"
+          },
+          {
+            "rawValue": 103,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": ["a1", "a2", "a3", "dc"],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 131,
+                "code": "a1",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/Consumption/L1/Power",
+                "idDeviceType": 6
+              },
+              {
+                "instance": 0,
+                "idDataAttribute": 140,
+                "code": "dc",
+                "dbusServiceType": "system",
+                "dbusPath": "/Dc/System/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856467,
+            "idDataAttribute": null,
+            "code": "consumption",
+            "description": "Consumption",
+            "textValue": null,
+            "formattedValue": "103 W"
+          },
+          {
+            "rawValue": 111.785,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": [
+              "P",
+              "P2",
+              "P3",
+              "Pi",
+              "Pi2",
+              "Pi3",
+              "Pdc",
+              "Pj",
+              "Pj2",
+              "Pj3"
+            ],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 113,
+                "code": "Pdc",
+                "dbusServiceType": "system",
+                "dbusPath": "/Dc/Pv/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856467,
+            "idDataAttribute": null,
+            "code": "solar_yield",
+            "description": "Solar_yield",
+            "textValue": null,
+            "formattedValue": "112 W"
+          },
+          {
+            "rawValue": 1217,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": ["g1", "g2", "g3"],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 134,
+                "code": "g1",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/Grid/L1/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856467,
+            "idDataAttribute": null,
+            "code": "from_to_grid",
+            "description": "From_to_grid",
+            "textValue": null,
+            "formattedValue": "1217 W"
+          },
+          {
+            "rawValue": null,
+            "formatWithUnit": "",
+            "consistsOfAttributeCodes": ["gs1", "gs2", "gs3"],
+            "dataAttributes": [],
+            "timestamp": null,
+            "code": "generator",
+            "description": "Generator",
+            "textValue": null,
+            "formattedValue": "",
+            "idDataAttribute": null
+          },
+          {
+            "rawValue": null,
+            "formatWithUnit": "",
+            "consistsOfAttributeCodes": ["Pi", "Pi2", "Pi3"],
+            "dataAttributes": [],
+            "timestamp": null,
+            "code": "ac_in",
+            "description": "Ac_in",
+            "textValue": null,
+            "formattedValue": "",
+            "idDataAttribute": null
+          },
+          {
+            "rawValue": null,
+            "formatWithUnit": "",
+            "consistsOfAttributeCodes": ["P", "P2", "P3"],
+            "dataAttributes": [],
+            "timestamp": null,
+            "code": "ac_out",
+            "description": "Ac_out",
+            "textValue": null,
+            "formattedValue": "",
+            "idDataAttribute": null
+          },
+          {
+            "idDataAttribute": 79,
+            "code": "s",
+            "description": "Switch Position",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 1,
+            "textValue": "On",
+            "instance": 257,
+            "timestamp": 1792856467,
+            "dbusServiceType": "vebus",
+            "dbusPath": "/Mode",
+            "rawValue": 3,
+            "formattedValue": "On",
+            "instances": {
+              "257": {
+                "rawValue": 3,
+                "formattedValue": "On",
+                "textValue": "On",
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 123,
+            "code": "ASoc",
+            "description": "Low state-of-charge alarm",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 2,
+            "textValue": "No alarm",
+            "instance": 288,
+            "timestamp": 1792856467,
+            "dbusServiceType": "battery",
+            "dbusPath": "/Alarms/LowSoc",
+            "rawValue": 0,
+            "formattedValue": "No alarm",
+            "instances": {
+              "288": {
+                "rawValue": 0,
+                "formattedValue": "No alarm",
+                "textValue": "No alarm",
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 329,
+            "code": "tf",
+            "description": "Tank fluid type",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 5,
+            "textValue": "Fuel",
+            "instance": 21,
+            "timestamp": 1792721290,
+            "dbusServiceType": "tank",
+            "dbusPath": "/FluidType",
+            "rawValue": 0,
+            "formattedValue": "Fuel",
+            "instances": {
+              "20": {
+                "rawValue": 1,
+                "formattedValue": "Fresh water",
+                "textValue": "Fresh water",
+                "timestamp": 1792721290
+              },
+              "21": {
+                "rawValue": 0,
+                "formattedValue": "Fuel",
+                "textValue": "Fuel",
+                "timestamp": 1792721290
+              }
+            }
+          },
+          {
+            "idDataAttribute": 330,
+            "code": "tl",
+            "description": "Tank level",
+            "formatWithUnit": "%.0F %%",
+            "dataType": "float",
+            "idDeviceType": 5,
+            "timestamp": 1792856467,
+            "dbusServiceType": "tank",
+            "dbusPath": "/Level",
+            "instances": {
+              "20": {
+                "rawValue": 79,
+                "formattedValue": "79 %",
+                "textValue": null,
+                "timestamp": 1792856467
+              },
+              "21": {
+                "rawValue": 60,
+                "formattedValue": "60 %",
+                "textValue": null,
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 559,
+            "code": "Agl",
+            "description": "Grid alarm",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 6,
+            "textValue": "Grid ok",
+            "instance": 257,
+            "timestamp": 1792856467,
+            "dbusServiceType": "system",
+            "dbusPath": "/Ac/Alarms/GridLost",
+            "rawValue": 0,
+            "formattedValue": "Grid ok",
+            "instances": {
+              "0": {
+                "rawValue": 0,
+                "formattedValue": "Grid ok",
+                "textValue": "Grid ok",
+                "timestamp": 1676342646
+              },
+              "257": {
+                "rawValue": 0,
+                "formattedValue": "Grid ok",
+                "textValue": "Grid ok",
+                "timestamp": 1792856467
+              }
+            }
+          },
+          {
+            "idDataAttribute": 638,
+            "code": "tcn",
+            "description": "Tank custom name",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 5,
+            "timestamp": 1792721290,
+            "dbusServiceType": "tank",
+            "dbusPath": "/CustomName",
+            "instances": {
+              "20": {
+                "rawValue": "Fresh water tank",
+                "formattedValue": "Fresh water tank",
+                "textValue": null,
+                "timestamp": 1792721290
+              },
+              "21": {
+                "rawValue": "Diesel tank",
+                "formattedValue": "Diesel tank",
+                "textValue": null,
+                "timestamp": 1792721290
+              }
+            }
+          },
+          {
+            "code": "soc_status",
+            "description": "SOC Status",
+            "rawValue": 75,
+            "formattedValue": "Charging",
+            "textValue": "Charging",
+            "idDataAttribute": null
+          }
+        ],
+        "demo_mode": false,
+        "high_workload": false,
+        "prices_unavailable": false,
+        "currency": {
+          "idCurrency": 1,
+          "code": "EUR",
+          "name": "Euro",
+          "sign": "€"
+        },
+        "current_alarms": [],
+        "num_alarms": 0,
+        "last_location_timestamp": false,
+        "nodered_running": false,
+        "premium_features": [],
+        "GUIv": 1
+      },
+      {
+        "idSite": 219742,
+        "accessLevel": 0,
+        "owner": true,
+        "is_admin": false,
+        "name": "ESS System",
+        "identifier": "0000demo219742",
+        "idUser": 22,
+        "pvMax": 0,
+        "timezone": "Africa/Casablanca",
+        "phonenumber": null,
+        "notes": null,
+        "geofenceEnabled": false,
+        "realtimeUpdates": true,
+        "restrictNodeRed": false,
+        "hasMains": 1,
+        "hasGenerator": 1,
+        "noDataAlarmTimeout": null,
+        "alarmMonitoring": 1,
+        "invalidVRMAuthTokenUsedInLogRequest": 0,
+        "syscreated": 1664953641,
+        "isPaygo": 0,
+        "paygoCurrency": null,
+        "paygoTotalAmount": null,
+        "inverterChargerControl": 1,
+        "remoteConsoleChoice": "rc_gui_v2",
+        "favorite": 0,
+        "isSystem": 0,
+        "shared": false,
+        "device_icon": "battery",
+        "alarm": false,
+        "last_timestamp": 1792856441,
+        "new_tags": false,
+        "current_time": "15:41",
+        "timezone_offset": 0,
+        "extended": [
+          {
+            "idDataAttribute": 2,
+            "code": "v",
+            "description": "Fw Version",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792723176,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": "v3.85",
+            "formattedValue": "v3.85"
+          },
+          {
+            "idDataAttribute": 40,
+            "code": "S",
+            "description": "VE.Bus state",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 1,
+            "textValue": "Bulk",
+            "instance": 276,
+            "timestamp": 1792856441,
+            "dbusServiceType": "vebus",
+            "dbusPath": "/State",
+            "rawValue": 3,
+            "formattedValue": "Bulk",
+            "instances": {
+              "276": {
+                "rawValue": 3,
+                "formattedValue": "Bulk",
+                "textValue": "Bulk",
+                "timestamp": 1792856441
+              }
+            }
+          },
+          {
+            "idDataAttribute": 143,
+            "code": "bv",
+            "description": "Voltage",
+            "formatWithUnit": "%.2F V",
+            "dataType": "float",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/Voltage",
+            "rawValue": 49.01,
+            "formattedValue": "49.01 V"
+          },
+          {
+            "idDataAttribute": 144,
+            "code": "bs",
+            "description": "Battery SOC",
+            "formatWithUnit": "%.1F %%",
+            "dataType": "float",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/Soc",
+            "rawValue": 48,
+            "formattedValue": "48.0 %"
+          },
+          {
+            "idDataAttribute": 147,
+            "code": "bc",
+            "description": "Current",
+            "formatWithUnit": "%.2F A",
+            "dataType": "float",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/Current",
+            "rawValue": -8.4,
+            "formattedValue": "-8.40 A"
+          },
+          {
+            "idDataAttribute": 215,
+            "code": "bst",
+            "description": "Battery state",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 6,
+            "textValue": "discharging",
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": "system",
+            "dbusPath": "/Dc/Battery/State",
+            "rawValue": 2,
+            "formattedValue": "Discharging"
+          },
+          {
+            "idDataAttribute": 251,
+            "code": "si1",
+            "description": "AC Input 1 ",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Grid",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/SystemSetup/AcInput1",
+            "rawValue": 1,
+            "formattedValue": "Grid"
+          },
+          {
+            "idDataAttribute": 252,
+            "code": "si2",
+            "description": "AC Input 2",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Generator",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/SystemSetup/AcInput2",
+            "rawValue": 2,
+            "formattedValue": "Generator"
+          },
+          {
+            "idDataAttribute": 453,
+            "code": "cp",
+            "description": "Capabilities",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792723176,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 32767,
+            "formattedValue": "32767"
+          },
+          {
+            "idDataAttribute": 469,
+            "code": "sca",
+            "description": "ESS Scheduled Charging",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Not active",
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 0,
+            "formattedValue": "Not active"
+          },
+          {
+            "idDataAttribute": 570,
+            "code": "st",
+            "description": "System type",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 6,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "system",
+            "dbusPath": "/SystemType",
+            "rawValue": "ESS",
+            "formattedValue": "ESS"
+          },
+          {
+            "idDataAttribute": 571,
+            "code": "ss",
+            "description": "System state",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 6,
+            "textValue": "Recharging",
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": "system",
+            "dbusPath": "/SystemState/State",
+            "rawValue": 258,
+            "formattedValue": "Recharging"
+          },
+          {
+            "idDataAttribute": 577,
+            "code": "rtt",
+            "description": "D-Bus Round-trip time",
+            "formatWithUnit": "%.0F ms",
+            "dataType": "float",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792856441,
+            "dbusServiceType": null,
+            "dbusPath": null,
+            "rawValue": 1,
+            "formattedValue": "1 ms"
+          },
+          {
+            "idDataAttribute": 692,
+            "code": "nr",
+            "description": "NodeRed",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Off",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Services/NodeRed",
+            "rawValue": 0,
+            "formattedValue": "Off"
+          },
+          {
+            "idDataAttribute": 693,
+            "code": "sk",
+            "description": "SignalK",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Off",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Services/SignalK",
+            "rawValue": 0,
+            "formattedValue": "Off"
+          },
+          {
+            "idDataAttribute": 1270,
+            "code": "dem",
+            "description": "DESS Mode – Controlled by user",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Auto",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/DynamicEss/Mode",
+            "rawValue": 1,
+            "formattedValue": "Auto"
+          },
+          {
+            "idDataAttribute": 1336,
+            "code": "decp",
+            "description": "DESS Capabilities",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "system",
+            "dbusPath": "/DynamicEss/Capabilities",
+            "rawValue": 191,
+            "formattedValue": "191"
+          },
+          {
+            "idDataAttribute": 1504,
+            "code": "dea",
+            "description": "DESS Available",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Available",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "system",
+            "dbusPath": "/DynamicEss/Available",
+            "rawValue": 1,
+            "formattedValue": "Available"
+          },
+          {
+            "idDataAttribute": 1612,
+            "code": "vrm",
+            "description": "VRM Portal Mode",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Full",
+            "instance": 0,
+            "timestamp": 1792723188,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Network/VrmPortal",
+            "rawValue": 2,
+            "formattedValue": "Full"
+          },
+          {
+            "idDataAttribute": 1722,
+            "code": "GUIv",
+            "description": "GUI version",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "1",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "platform",
+            "dbusPath": "/Gui/RunningVersion",
+            "rawValue": 1,
+            "formattedValue": "1"
+          },
+          {
+            "idDataAttribute": 1865,
+            "code": "shai",
+            "description": "System has normal AC loads",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 0,
+            "textValue": "Input side loads",
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/SystemSetup/HasAcInLoads",
+            "rawValue": 1,
+            "formattedValue": "Input side loads"
+          },
+          {
+            "idDataAttribute": 2041,
+            "code": "gsu",
+            "description": "GPS speed unit",
+            "formatWithUnit": "%s",
+            "dataType": "string",
+            "idDeviceType": 0,
+            "textValue": null,
+            "instance": 0,
+            "timestamp": 1792723184,
+            "dbusServiceType": "settings",
+            "dbusPath": "/Settings/Gps/SpeedUnit",
+            "rawValue": "km/h",
+            "formattedValue": "km/h"
+          },
+          {
+            "rawValue": 351,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": ["a1", "a2", "a3", "dc"],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 131,
+                "code": "a1",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/Consumption/L1/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856441,
+            "idDataAttribute": null,
+            "code": "consumption",
+            "description": "Consumption",
+            "textValue": null,
+            "formattedValue": "351 W"
+          },
+          {
+            "rawValue": -1.5,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": [
+              "P",
+              "P2",
+              "P3",
+              "Pi",
+              "Pi2",
+              "Pi3",
+              "Pdc",
+              "Pj",
+              "Pj2",
+              "Pj3"
+            ],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 111,
+                "code": "P",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/PvOnOutput/L1/Power",
+                "idDeviceType": 6
+              },
+              {
+                "instance": 0,
+                "idDataAttribute": 112,
+                "code": "Pi",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/PvOnGrid/L1/Power",
+                "idDeviceType": 6
+              },
+              {
+                "instance": 0,
+                "idDataAttribute": 113,
+                "code": "Pdc",
+                "dbusServiceType": "system",
+                "dbusPath": "/Dc/Pv/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856441,
+            "idDataAttribute": null,
+            "code": "solar_yield",
+            "description": "Solar_yield",
+            "textValue": null,
+            "formattedValue": "-2 W"
+          },
+          {
+            "rawValue": -33.8,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": ["g1", "g2", "g3"],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 134,
+                "code": "g1",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/Grid/L1/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856441,
+            "idDataAttribute": null,
+            "code": "from_to_grid",
+            "description": "From_to_grid",
+            "textValue": null,
+            "formattedValue": "-34 W"
+          },
+          {
+            "rawValue": null,
+            "formatWithUnit": "",
+            "consistsOfAttributeCodes": ["gs1", "gs2", "gs3"],
+            "dataAttributes": [],
+            "timestamp": null,
+            "code": "generator",
+            "description": "Generator",
+            "textValue": null,
+            "formattedValue": "",
+            "idDataAttribute": null
+          },
+          {
+            "rawValue": -1.5,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": ["Pi", "Pi2", "Pi3"],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 112,
+                "code": "Pi",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/PvOnGrid/L1/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856441,
+            "idDataAttribute": null,
+            "code": "ac_in",
+            "description": "Ac_in",
+            "textValue": null,
+            "formattedValue": "-2 W"
+          },
+          {
+            "rawValue": 0,
+            "formatWithUnit": "%.0F W",
+            "consistsOfAttributeCodes": ["P", "P2", "P3"],
+            "dataAttributes": [
+              {
+                "instance": 0,
+                "idDataAttribute": 111,
+                "code": "P",
+                "dbusServiceType": "system",
+                "dbusPath": "/Ac/PvOnOutput/L1/Power",
+                "idDeviceType": 6
+              }
+            ],
+            "timestamp": 1792856441,
+            "idDataAttribute": null,
+            "code": "ac_out",
+            "description": "Ac_out",
+            "textValue": null,
+            "formattedValue": "0 W"
+          },
+          {
+            "idDataAttribute": 79,
+            "code": "s",
+            "description": "Switch Position",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 1,
+            "textValue": "On",
+            "instance": 276,
+            "timestamp": 1792856441,
+            "dbusServiceType": "vebus",
+            "dbusPath": "/Mode",
+            "rawValue": 3,
+            "formattedValue": "On",
+            "instances": {
+              "276": {
+                "rawValue": 3,
+                "formattedValue": "On",
+                "textValue": "On",
+                "timestamp": 1792856441
+              }
+            }
+          },
+          {
+            "idDataAttribute": 559,
+            "code": "Agl",
+            "description": "Grid alarm",
+            "formatWithUnit": "%s",
+            "dataType": "enum",
+            "idDeviceType": 6,
+            "textValue": "Grid ok",
+            "instance": 276,
+            "timestamp": 1792856441,
+            "dbusServiceType": "system",
+            "dbusPath": "/Ac/Alarms/GridLost",
+            "rawValue": 0,
+            "formattedValue": "Grid ok",
+            "instances": {
+              "276": {
+                "rawValue": 0,
+                "formattedValue": "Grid ok",
+                "textValue": "Grid ok",
+                "timestamp": 1792856441
+              }
+            }
+          },
+          {
+            "code": "soc_status",
+            "description": "SOC Status",
+            "rawValue": 25,
+            "formattedValue": "Discharging",
+            "textValue": "Discharging",
+            "idDataAttribute": null
+          }
+        ],
+        "demo_mode": false,
+        "high_workload": false,
+        "prices_unavailable": false,
+        "currency": {
+          "idCurrency": 1,
+          "code": "EUR",
+          "name": "Euro",
+          "sign": "€"
+        },
+        "current_alarms": [],
+        "num_alarms": 0,
+        "last_location_timestamp": false,
+        "nodered_running": false,
+        "premium_features": [],
+        "GUIv": 1
+      }
+    ]
+  },
+  "kwh": {
+    "success": true,
+    "records": {
+      "Pb": [[1792800000000, 5.852825014095288]],
+      "Pg": [[1792800000000, 17.733682692050934]],
+      "Pc": [[1792800000000, 13.092757806996815]],
+      "Bc": [[1792800000000, 5.157622947823256]],
+      "Bg": [[1792800000000, 0.5379869269672781]],
+      "kwh": [[1792800000000, 42.37487538793357]]
+    },
+    "totals": {
+      "Pb": 5.852825014095288,
+      "Pg": 17.733682692050934,
+      "Pc": 13.092757806996815,
+      "Bc": 5.157622947823256,
+      "Bg": 0.5379869269672781,
+      "kwh": 42.37487538793357
+    }
+  },
+  "forecast": {
+    "success": true,
+    "records": {
+      "vrm_consumption_fc": [
+        [1792852904000, 333.96873522497197],
+        [1792856504000, 334.3440412367189],
+        [1792860104000, 355.5645002210939],
+        [1792863704000, 377.33165110000016],
+        [1792867304000, 320.80296457656266],
+        [1792870904000, 288.73729170173436],
+        [1792874504000, 298.1426252210939],
+        [1792878104000, 288.73729170173436],
+        [1792881704000, 427.4519208753908],
+        [1792885304000, 2010.321580299219],
+        [1792888904000, 1870.7635358656253],
+        [1792892504000, 2007.333787330469],
+        [1792896104000, 2717.4799054945315],
+        [1792899704000, 2051.837449439844],
+        [1792903304000, 1815.8010114515628],
+        [1792906904000, 1142.7464460218753],
+        [1792910504000, 863.3083814466798],
+        [1792914104000, 714.4673322523439],
+        [1792917704000, 727.1171583021486],
+        [1792921304000, 656.7943738783205],
+        [1792924904000, 553.4996808851564],
+        [1792928504000, 342.20274485000016],
+        [1792932104000, 298.88243235000016],
+        [1792935704000, 318.1880353773439],
+        [1792939304000, 331.3717511976564]
+      ],
+      "solar_yield_forecast": [
+        [1792852904000, 1479.4705116729428],
+        [1792856504000, 279.1974246305342],
+        [1792860104000, 0],
+        [1792863704000, 0],
+        [1792867304000, 0],
+        [1792870904000, 0],
+        [1792874504000, 0],
+        [1792878104000, 0],
+        [1792881704000, 0],
+        [1792885304000, 0],
+        [1792888904000, 0],
+        [1792892504000, 0],
+        [1792896104000, 0],
+        [1792899704000, 0],
+        [1792903304000, 0],
+        [1792906904000, 756.8334211595488],
+        [1792910504000, 4284.6975880516975],
+        [1792914104000, 8767.851474938325],
+        [1792917704000, 11268.26333648189],
+        [1792921304000, 10612.854665689165],
+        [1792924904000, 18531.93148932377],
+        [1792928504000, 18665.12727403538],
+        [1792932104000, 14015.85732841962],
+        [1792935704000, 8063.032877737789],
+        [1792939304000, 3274.4152306901888]
+      ],
+      "vrm_consumption_fc_adj": false,
+      "vrm_consum_hp_fc": false,
+      "vrm_consum_evcs_fc": false,
+      "vrm_consum_evcs_fc_adj": false,
+      "vrm_consum_hp_fc_adj": false,
+      "vrm_dess_to_evcs_fc": false
+    },
+    "totals": {
+      "vrm_consumption_fc": 21447.19662830209,
+      "solar_yield_forecast": 99999.53262283085,
+      "vrm_consumption_fc_adj": false,
+      "vrm_consum_hp_fc": false,
+      "vrm_consum_evcs_fc": false,
+      "vrm_consum_evcs_fc_adj": false,
+      "vrm_consum_hp_fc_adj": false,
+      "vrm_dess_to_evcs_fc": false
+    }
+  },
+  "alarmLogEmpty": {
+    "success": false,
+    "error_code": "no_results_found",
+    "errors": ["No alarm log found."]
+  }
+}

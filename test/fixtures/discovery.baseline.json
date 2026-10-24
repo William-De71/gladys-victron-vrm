@@ -1,0 +1,612 @@
+{
+  "devices": {
+    "complete": {
+      "external_id": "ext:test-integration:site:101",
+      "should_poll": false,
+      "params": ["VRM_SITE_ID", "VRM_PORTAL_ID"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:site:101:battery_level",
+          "category": "battery-storage",
+          "type": "battery-level",
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:battery_charge_power",
+          "category": "battery-storage",
+          "type": "charge-power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:battery_discharge_power",
+          "category": "battery-storage",
+          "type": "discharge-power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:battery_voltage",
+          "category": "energy-sensor",
+          "type": "voltage",
+          "unit": "volt",
+          "min": 0,
+          "max": 1000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:pv_power",
+          "category": "energy-production-sensor",
+          "type": "power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:pv_today",
+          "category": "energy-production-sensor",
+          "type": "daily-production",
+          "unit": "kilowatt-hour",
+          "min": 0,
+          "max": 2000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:grid_power",
+          "category": "grid-sensor",
+          "type": "power",
+          "unit": "watt",
+          "min": -100000,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:load_power",
+          "category": "energy-sensor",
+          "type": "power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:load_today",
+          "category": "energy-sensor",
+          "type": "index-today",
+          "unit": "kilowatt-hour",
+          "min": 0,
+          "max": 2000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:101:generator_power",
+          "category": "energy-production-sensor",
+          "type": "power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "battery_only": {
+      "external_id": "ext:test-integration:site:202",
+      "should_poll": false,
+      "params": ["VRM_SITE_ID", "VRM_PORTAL_ID"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:site:202:battery_level",
+          "category": "battery-storage",
+          "type": "battery-level",
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:202:battery_charge_power",
+          "category": "battery-storage",
+          "type": "charge-power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:202:battery_discharge_power",
+          "category": "battery-storage",
+          "type": "discharge-power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:202:battery_voltage",
+          "category": "energy-sensor",
+          "type": "voltage",
+          "unit": "volt",
+          "min": 0,
+          "max": 1000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:202:load_power",
+          "category": "energy-sensor",
+          "type": "power",
+          "unit": "watt",
+          "min": 0,
+          "max": 100000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:site:202:load_today",
+          "category": "energy-sensor",
+          "type": "index-today",
+          "unit": "kilowatt-hour",
+          "min": 0,
+          "max": 2000,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    }
+  },
+  "manifest": {
+    "config_schema": [
+      {
+        "key": "intro",
+        "type": "section"
+      },
+      {
+        "key": "access_token",
+        "type": "secret"
+      },
+      {
+        "key": "readings",
+        "type": "section"
+      },
+      {
+        "key": "poll_interval",
+        "type": "select"
+      },
+      {
+        "key": "battery_low_level",
+        "type": "select"
+      },
+      {
+        "key": "offline_after",
+        "type": "select"
+      },
+      {
+        "key": "language",
+        "type": "select"
+      }
+    ],
+    "actions": ["test_connection", "diagnostic"],
+    "action_fields": {
+      "test_connection": [],
+      "diagnostic": []
+    },
+    "widgets": [
+      {
+        "key": "live",
+        "settings": ["installation"],
+        "options": {}
+      },
+      {
+        "key": "today",
+        "settings": ["installation"],
+        "options": {}
+      },
+      {
+        "key": "forecast",
+        "settings": ["installation"],
+        "options": {}
+      },
+      {
+        "key": "alarms",
+        "settings": ["installation"],
+        "options": {}
+      }
+    ],
+    "scene_triggers": [
+      {
+        "key": "alarm_raised",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "alarm_id",
+            "type": "number"
+          },
+          {
+            "key": "description",
+            "type": "string"
+          },
+          {
+            "key": "alarm_device",
+            "type": "string"
+          },
+          {
+            "key": "started_at",
+            "type": "string"
+          },
+          {
+            "key": "cleared_at",
+            "type": "string"
+          },
+          {
+            "key": "duration_minutes",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "alarm_cleared",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "alarm_id",
+            "type": "number"
+          },
+          {
+            "key": "description",
+            "type": "string"
+          },
+          {
+            "key": "alarm_device",
+            "type": "string"
+          },
+          {
+            "key": "started_at",
+            "type": "string"
+          },
+          {
+            "key": "cleared_at",
+            "type": "string"
+          },
+          {
+            "key": "duration_minutes",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "battery_low",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "battery_level",
+            "type": "number"
+          },
+          {
+            "key": "battery_voltage",
+            "type": "number"
+          },
+          {
+            "key": "low_level",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "battery_full",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "battery_level",
+            "type": "number"
+          },
+          {
+            "key": "battery_voltage",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "grid_lost",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "battery_level",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "grid_restored",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "battery_level",
+            "type": "number"
+          },
+          {
+            "key": "minutes_lost",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "installation_offline",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "minutes_without_data",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "installation_online",
+        "fields": [
+          {
+            "key": "installation",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "installation",
+            "type": "string"
+          },
+          {
+            "key": "installation_name",
+            "type": "string"
+          },
+          {
+            "key": "site_id",
+            "type": "number"
+          },
+          {
+            "key": "minutes_without_data",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "key": "access_refused",
+        "fields": [
+          {
+            "key": "reason",
+            "options": ["auth", "forbidden"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "reason",
+            "type": "string"
+          },
+          {
+            "key": "code",
+            "type": "string"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "scene_actions": [
+      {
+        "key": "get_today",
+        "fields": ["installation"],
+        "outputs": [
+          {
+            "key": "solar_kwh",
+            "type": "number"
+          },
+          {
+            "key": "consumption_kwh",
+            "type": "number"
+          },
+          {
+            "key": "import_kwh",
+            "type": "number"
+          },
+          {
+            "key": "export_kwh",
+            "type": "number"
+          },
+          {
+            "key": "charge_kwh",
+            "type": "number"
+          },
+          {
+            "key": "discharge_kwh",
+            "type": "number"
+          },
+          {
+            "key": "generator_kwh",
+            "type": "number"
+          },
+          {
+            "key": "self_sufficiency",
+            "type": "number"
+          },
+          {
+            "key": "battery_level",
+            "type": "number"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "get_forecast",
+        "fields": ["installation"],
+        "outputs": [
+          {
+            "key": "solar_today_kwh",
+            "type": "number"
+          },
+          {
+            "key": "solar_remaining_kwh",
+            "type": "number"
+          },
+          {
+            "key": "solar_tomorrow_kwh",
+            "type": "number"
+          },
+          {
+            "key": "consumption_today_kwh",
+            "type": "number"
+          },
+          {
+            "key": "consumption_tomorrow_kwh",
+            "type": "number"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

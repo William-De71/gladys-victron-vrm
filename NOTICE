@@ -1,0 +1,13 @@
+Gladys Victron VRM integration
+Copyright 2026 William Deren
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It reads the data of the Victron Energy installations of the user through the
+official VRM API v2 (https://vrm-api-docs.victronenergy.com), with a personal
+access token of the user's own VRM account. This integration is not
+affiliated with nor endorsed by Victron Energy. The endpoints, fields and
+limits follow the official documentation and answers of the live API; its
+scope was compared with the Home Assistant "Victron Remote Monitoring"
+integration and its "victron-vrm" library (https://github.com/KSoft-Si/vrm-client,
+MIT License). No code is taken from either.
