@@ -13,7 +13,7 @@ Transport : cloud. Le jeton d’accès part vers VRM (`vrmapi.victronenergy.com`
 
 ## Prérequis
 
-- Gladys Assistant 5.1.0 ou plus récent.
+- Gladys Assistant 5.3.0 ou plus récent.
 - Une installation Victron avec un appareil GX qui envoie ses données à VRM (elle apparaît sur vrm.victronenergy.com).
 - **Un jeton d’accès VRM** : dans VRM, ouvrez **Preferences → Integrations → Access tokens** ([lien direct](https://vrm.victronenergy.com/access-tokens)), créez un jeton et copiez-le. Un jeton ouvre tout le compte (gardez-le secret) ; l’intégration ne fait que lire avec.
 - Pour les prévisions : des panneaux solaires, la position de l’installation dans VRM et environ 30 jours d’historique (règle de VRM).

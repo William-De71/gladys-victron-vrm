@@ -5,7 +5,7 @@
 [![Licencia: Apache-2.0](https://img.shields.io/badge/licencia-Apache--2.0-blue.svg)](LICENSE)
 [![Última versión](https://img.shields.io/github/v/release/William-De71/gladys-victron-vrm?sort=semver)](https://github.com/William-De71/gladys-victron-vrm/releases)
 [![CI](https://img.shields.io/github/actions/workflow/status/William-De71/gladys-victron-vrm/release.yml?branch=main&label=CI)](https://github.com/William-De71/gladys-victron-vrm/actions/workflows/release.yml)
-[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.1.0-2f6fb5)](https://gladysassistant.com)
+[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.3.0-2f6fb5)](https://gladysassistant.com)
 
 ![Victron VRM para Gladys Assistant](cover.jpg)
 
@@ -110,7 +110,7 @@ Ejemplos:
 
 ## Requisitos previos
 
-- Gladys Assistant **5.1.0** o posterior (widgets y escenas de integraciones): las instancias más antiguas no pueden instalar la integración.
+- Gladys Assistant **5.3.0** o posterior (widgets y escenas de integraciones; palabras clave y países del catálogo de Gladys 5.3): las instancias más antiguas no pueden instalar la integración.
 - Una instalación Victron con un dispositivo GX (Cerbo GX, Venus GX, Ekrano, una Raspberry Pi con Venus OS…) que envía sus datos a [VRM](https://vrm.victronenergy.com), y un **token de acceso de VRM** (Preferences → Integrations → Access tokens).
 - Internet: la integración solo habla con `vrmapi.victronenergy.com`.
 

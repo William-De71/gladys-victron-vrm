@@ -13,7 +13,7 @@ Transporte: nube. El token de acceso va a VRM (`vrmapi.victronenergy.com`) y los
 
 ## Requisitos previos
 
-- Gladys Assistant 5.1.0 o posterior.
+- Gladys Assistant 5.3.0 o posterior.
 - Una instalación Victron con un dispositivo GX que envía sus datos a VRM (aparece en vrm.victronenergy.com).
 - **Un token de acceso de VRM**: en VRM, abra **Preferences → Integrations → Access tokens** ([enlace directo](https://vrm.victronenergy.com/access-tokens)), cree un token y cópielo. Un token abre toda la cuenta (manténgalo en secreto); la integración solo lee con él.
 - Para las previsiones: paneles solares, la ubicación de la instalación en VRM y unos 30 días de historial (una regla de VRM).
