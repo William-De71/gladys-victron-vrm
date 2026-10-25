@@ -1,6 +1,6 @@
 {
   "name": "gladys-victron-vrm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "External Gladys Assistant integration for Victron Energy installations through the official VRM API: one device per installation (battery, solar, grid, consumption), VRM alarms and battery scene triggers, dashboard widgets. Read only.",
   "homepage": "https://github.com/William-De71/gladys-victron-vrm",
